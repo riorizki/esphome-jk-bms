@@ -197,8 +197,8 @@ void JkBmsBle::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t gat
       this->notify_handle_ = (chr->handle == 0x03) ? 0x05 : chr->handle;
         
       ESP_LOGD(TAG, "Notify Handle = %d", notify_handle_);
-      ESP_LOGD(TAG, "Parent gattc if = %d", this->parent()->get_gattc_if());
-      ESP_LOGD(TAG, "Remote BDA = %d", this->parent()->get_remote_bda());
+      ESP_LOGD(TAG, "Parent gattc if = %hhu", this->parent()->get_gattc_if());
+      ESP_LOGD(TAG, "Remote BDA = %hhu", this->parent()->get_remote_bda());
 
       auto status = esp_ble_gattc_register_for_notify(this->parent()->get_gattc_if(), this->parent()->get_remote_bda(),
                                                       this->notify_handle_);
