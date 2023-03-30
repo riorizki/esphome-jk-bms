@@ -196,9 +196,8 @@ void JkBmsBle::gattc_event_handler(esp_gattc_cb_event_t event, esp_gatt_if_t gat
       this->char_handle_ = chr->handle;
       this->notify_handle_ = (chr->handle == 0x03) ? 0x05 : chr->handle;
         
-      LOG_TEXT_SENSOR("", "Notify Handle = ", this->notify_handle_);
-      ESP_LOGI(TAG, "Notify Handle = %s", notify_handle_);
-      ESP_LOGD(TAG, "Notify Handle = %s", notify_handle_);
+      ESP_LOGI(TAG, "Notify Handle = %d", notify_handle_);
+      ESP_LOGD(TAG, "Notify Handle = %d", notify_handle_);
 
       auto status = esp_ble_gattc_register_for_notify(this->parent()->get_gattc_if(), this->parent()->get_remote_bda(),
                                                       this->notify_handle_);
@@ -701,7 +700,7 @@ void JkBmsBle::decode_jk02_cell_info_(const std::vector<uint8_t> &data) {
   //           0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
   //           0x00
   // 299   1   0xCD                   CRC
-  ESP_LOGD(TAG, "Notify Handle = %s", notify_handle_);
+  ESP_LOGD(TAG, "Notify Handle = %d", notify_handle_);
 
 
   this->status_notification_received_ = true;
